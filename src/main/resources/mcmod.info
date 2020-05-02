@@ -1,0 +1,16 @@
+[
+{
+  "modid": "dropt-bed",
+  "name": "Dropt Bed",
+  "description": "A well-behaved bed.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["codetaylor"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
