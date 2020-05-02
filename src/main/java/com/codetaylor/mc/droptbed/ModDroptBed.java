@@ -8,20 +8,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod(
-    modid = ModDroptBed.MOD_ID,
-    version = ModDroptBed.VERSION,
-    name = ModDroptBed.NAME
+    modid = "dropt-bed",
+    version = "@@VERSION@@",
+    name = "Dropt Bed"
 )
 @Mod.EventBusSubscriber
 public class ModDroptBed {
-
-  public static final String MOD_ID = "dropt-bed";
-  public static final String VERSION = "@@VERSION@@";
-  public static final String NAME = "Dropt Bed";
-
-  @Mod.Instance
-  @SuppressWarnings("unused")
-  public static ModDroptBed INSTANCE;
 
   @SubscribeEvent
   public static void onRegisterItems(RegistryEvent.Register<Block> event) {
