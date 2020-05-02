@@ -25,13 +25,11 @@ public class ModDroptBed {
   @SubscribeEvent
   public static void onRegisterItems(RegistryEvent.Register<Block> event) {
 
-    if (ModDroptBedConfig.REPLACE_VANILLA_BED) {
-      BlockBedReplacement block = new BlockBedReplacement();
-      ResourceLocation resourceLocation = new ResourceLocation("minecraft", "bed");
-      block.setRegistryName(resourceLocation);
-      block.setUnlocalizedName("bed");
-      block.setCreativeTab(CreativeTabs.DECORATIONS);
-      event.getRegistry().register(block);
-    }
+    BlockBedReplacement block = new BlockBedReplacement();
+    ResourceLocation resourceLocation = new ResourceLocation("minecraft", "bed");
+    block.setRegistryName(resourceLocation);
+    block.setUnlocalizedName("bed");
+    block.setCreativeTab(CreativeTabs.DECORATIONS);
+    event.getRegistry().register(block);
   }
 }
