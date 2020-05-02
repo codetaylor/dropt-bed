@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
     version = ModDroptBed.VERSION,
     name = ModDroptBed.NAME
 )
+@Mod.EventBusSubscriber
 public class ModDroptBed {
 
   public static final String MOD_ID = "dropt-bed";
