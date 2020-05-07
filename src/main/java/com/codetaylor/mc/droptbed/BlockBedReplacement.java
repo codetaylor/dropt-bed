@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -33,6 +34,21 @@ public class BlockBedReplacement
   public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 
     //
+  }
+
+  @Override
+  public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune) {
+
+    if (state.getValue(PART) == BlockBed.EnumPartType.HEAD) {
+
+      if (!world.isRemote && !world.restoringBlockSnapshots) {
+        TileEntityBed tileEntity = (TileEntityBed) world.getTileEntity(pos);
+
+        if (tileEntity != null) {
+          this.dropItems(world, this.harvesters.get(), pos, state, tileEntity);
+        }
+      }
+    }
   }
 
   @Override
@@ -62,19 +78,25 @@ public class BlockBedReplacement
     }
   }
 
-  private void dropItems(World world, EntityPlayer player, BlockPos pos, IBlockState state, TileEntityBed tileEntity) {
+  private void dropItems(World world, @Nullable EntityPlayer player, BlockPos pos, IBlockState state, TileEntityBed tileEntity) {
 
     ItemStack itemstack = tileEntity.getItemStack();
     ArrayList<ItemStack> drops = new ArrayList<>();
     drops.add(itemstack);
-    ForgeEventFactory.fireBlockHarvesting(drops, world, pos, state, 0, 1, this.isSilkTouching(player.getHeldItemMainhand()), player);
+    ForgeEventFactory.fireBlockHarvesting(drops, world, pos, state, 0, 1, this.isSilkTouching(player), player);
 
     for (ItemStack drop : drops) {
       Block.spawnAsEntity(world, pos, drop);
     }
   }
 
-  private boolean isSilkTouching(ItemStack heldItem) {
+  private boolean isSilkTouching(@Nullable EntityPlayer player) {
+
+    if (player == null) {
+      return false;
+    }
+
+    ItemStack heldItem = player.getHeldItemMainhand();
 
     if (heldItem.isEmpty()) {
       return false;
